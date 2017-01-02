@@ -5,15 +5,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import com.kimia.tomer.expirationdatereminders.data.ExpirationContracts.*;
 import com.kimia.tomer.expirationdatereminders.data.*;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class AddNewExpirationActivity extends AppCompatActivity {
     //Views
@@ -35,7 +32,7 @@ public class AddNewExpirationActivity extends AppCompatActivity {
         ExpirationDbHelper dbHelper = new ExpirationDbHelper(this);
         mDb = dbHelper.getWritableDatabase();
 
-        ((Button) findViewById(R.id.button_add_written_item)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_add_written_item).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addExpirationItem(view);
@@ -45,17 +42,20 @@ public class AddNewExpirationActivity extends AppCompatActivity {
 
     protected void addExpirationItem(View view)
     {
+        //make sure name is there
         String name = mItemNameEditText.getText().toString();
         if (name.isEmpty()) return;
+
+        //get date
         Calendar expirationDate = Calendar.getInstance();
         expirationDate.set(
                 mItemExpirationDatePicker.getYear(),
                 mItemExpirationDatePicker.getMonth(),
                 mItemExpirationDatePicker.getDayOfMonth()
         );
-
         long expirationTime = expirationDate.getTime().getTime();
 
+        //create CV and insert
         ContentValues cv = new ContentValues();
         cv.put(ExpirationEntry.COLUMN_ITEM_NAME, name);
         cv.put(ExpirationEntry.COLUMN_EXPIRATION, expirationTime);
@@ -65,5 +65,9 @@ public class AddNewExpirationActivity extends AppCompatActivity {
         mItemNameEditText.getText().clear();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        mDb.close();
+        super.onDestroy();
+    }
 }
