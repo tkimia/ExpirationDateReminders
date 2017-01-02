@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Expiration Date Reminders</string>
+    <string name="add_item">Add Item</string>
 </resources>
