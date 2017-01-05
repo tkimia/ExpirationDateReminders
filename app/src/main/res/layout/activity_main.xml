@@ -7,10 +7,41 @@
     android:layout_height="match_parent"
     tools:context="com.kimia.tomer.expirationdatereminders.MainActivity">
 
+    <TextView
+        android:id="@+id/textview_empty_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:text="@string/message_empty_list"/>
+
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:text="@string/header_item_expiration"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:text="@string/header_item_name"/>
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_expiration_items"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_layout"
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_add_expiration_item"

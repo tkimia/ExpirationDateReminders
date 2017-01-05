@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Expiration Date Reminders</string>
     <string name="add_item">Add Item</string>
+
+    <string name="header_item_name">Item</string>
+    <string name="header_item_expiration">Days Left</string>
+
+    <string name="message_empty_list">Your list is empty! Click the add button to add more items.</string>
 </resources>
